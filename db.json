@@ -1,0 +1,34 @@
+{
+  "photos": [
+    {
+      "id": "1",
+      "title": "Hamdhulla Shakeeb",
+      "src": "1.jpg",
+      "uploadDate": "25.12.2022"
+    },
+    {
+      "id": "2",
+      "title": "Bechir Kaddech",
+      "src": "2.jpg",
+      "uploadDate": "05.02.2021"
+    },
+    {
+      "id": "3",
+      "title": "Cash Macanaya",
+      "src": "3.jpg",
+      "uploadDate": "05.02.2021"
+    },
+    {
+      "id": "4",
+      "title": "Bilal Mansuri",
+      "src": "4.jpg",
+      "uploadDate": "30.03.2022"
+    },
+    {
+      "id": "null",
+      "title": "Example Not Found",
+      "src": "not-found.jpg",
+      "uploadDate": "05.02.2021"
+    }
+  ]
+}
