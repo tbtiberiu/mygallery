@@ -13,7 +13,6 @@ const Gallery = () => {
         (async () => {
             const data = await listPhotos();
             setPhotos(data);
-            console.log(data);
         })().catch(err => console.log(err));
     }, []);
 
@@ -24,8 +23,8 @@ const Gallery = () => {
                 <Link to="/add-photo" className={styles.Link}>Add a photo</Link>
             </div>
             <div className={styles.Gallery__body}>
-                {photos.length ? photos.map(({ id, title, src, uploadDate }) => (
-                    <PhotoCard key={id} title={title} src={src} uploadDate={uploadDate} />
+                {photos.length ? photos.map(({ id, title, image, type, uploadDate }) => (
+                    <PhotoCard key={id} title={title} src={image} type={type} uploadDate={uploadDate} />
                 )) : <p>No photos yet.</p>}
             </div>
         </div>

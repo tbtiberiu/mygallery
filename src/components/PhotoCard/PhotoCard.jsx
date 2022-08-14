@@ -1,30 +1,30 @@
 import { useState, useEffect } from "react";
 import styles from "./PhotoCard.module.scss";
 
-const PhotoCard = ({ title, src, uploadDate }) => {
-    const imgType = src.split(".")[src.split(".").length - 1];
+const PhotoCard = ({ title, src, type, uploadDate }) => {
     const [notFound, setNotFound] = useState(false);
-    const [img, setImage] = useState(new Image());
+    const [img, setImg] = useState(new Image());
 
     // TO DO: fix bug for slow internet connection
     useEffect(() => {
         const newImg = new Image();
-        newImg.src = `img/${src}`;
-        setImage(newImg);
+        newImg.src = src;
+        newImg.onload = () => {
+            setImg(newImg);
+        }
     }, [src]);
 
     return (
         <div className={styles.PhotoCard}>
             <img className={styles.PhotoCard__image} onError={({ currentTarget }) => {
-                currentTarget.onerror = null;
-                currentTarget.src = "./img/image-not-found.jpg";
+                currentTarget.src = "./not-found.jpg";
                 setNotFound(true);
-            }} src={`./img/${src}`} alt={title} />
+            }} src={src} alt={title} />
             <div className={styles.PhotoCard__title}>{title}</div>
             <div className={styles.PhotoCard__body}>
                 {
                     notFound ? <p>Image not found</p> :
-                        <p>{img.naturalWidth} x {img.naturalHeight} - {uploadDate} - {imgType.toUpperCase()}</p>
+                        <p>{img.naturalWidth} x {img.naturalHeight} - {uploadDate} - {type.toUpperCase()}</p>
                 }
             </div>
         </div>

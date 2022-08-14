@@ -1,9 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 
-import './App.css'
+import './App.scss'
 
 import Layout from './components/Layout/Layout';
 import Gallery from './components/Gallery/Gallery';
+import AddPhoto from './components/AddPhoto/AddPhoto';
 
 function App() {
   return (
@@ -12,13 +13,10 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Gallery />} />
+            <Route path="/add-photo" element={<AddPhoto />} />
           </Routes>
         </main>
       </Layout>
-      {/* <div className="container">
-        <SearchBar />
-        <Gallery />\
-      </div> */}
     </div>
   )
 }
