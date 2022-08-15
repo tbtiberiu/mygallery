@@ -5,7 +5,6 @@ const PhotoCard = ({ title, src, type, uploadDate }) => {
     const [notFound, setNotFound] = useState(false);
     const [img, setImg] = useState(new Image());
 
-    // TO DO: fix bug for slow internet connection
     useEffect(() => {
         const newImg = new Image();
         newImg.src = src;
