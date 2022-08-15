@@ -24,7 +24,9 @@ const Gallery = () => {
             </div>
             <div className={styles.Gallery__body}>
                 {photos.length ? photos.map(({ id, title, image, type, uploadDate }) => (
-                    <PhotoCard key={id} title={title} src={image} type={type} uploadDate={uploadDate} />
+                    <Link to={`/photos/${id}`} key={id}>
+                        <PhotoCard title={title} src={image} type={type} uploadDate={uploadDate} />
+                    </Link>
                 )) : <p>No photos yet.</p>}
             </div>
         </div>

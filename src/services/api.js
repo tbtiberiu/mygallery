@@ -3,6 +3,15 @@ import { v4 as uuid } from 'uuid';
 
 const baseUrl = "http://localhost:3000";
 
+export const getPhoto = async (id) => {
+    const response = await axios.get(`${baseUrl}/photos/${id}`);
+    return response.data;
+}
+
+export const deletePhoto = async (id) => {
+    await axios.delete(`${baseUrl}/photos/${id}`);
+}
+
 export const listPhotos = async () => {
     try {
         const response = await axios.get(`${baseUrl}/photos`);
