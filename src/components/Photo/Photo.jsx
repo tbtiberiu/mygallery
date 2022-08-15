@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from './Photo.module.scss';
 
@@ -30,7 +32,7 @@ const Photo = () => {
                 <h1>{product ? product.title : "Loading..."}</h1>
                 <div className={styles.Photo__buttons}>
                     <Link className={styles.Photo__buttons__back} to="/">Back to gallery</Link>
-                    <button className={styles.Photo__buttons__delete} onClick={handleDelete}>Delete</button>
+                    <button className={styles.Photo__buttons__delete} onClick={handleDelete}><FontAwesomeIcon icon={faTrashCan} /></button>
                 </div>
             </div>
             {product &&
