@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { faTrashCan, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from './Photo.module.scss';
 
-import { getPhoto, deletePhoto } from "../../services/api";
+import { getPhoto, deletePhoto, updatePhoto } from "../../services/api";
 
 const Photo = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
+    const [title, setTitle] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,20 +19,32 @@ const Photo = () => {
                 return navigate("/");
             const data = await getPhoto(id);
             setProduct(data);
+            setTitle(data.title);
         })().catch(err => console.log(err));
     }, []);
+
+    const handleInputChange = (e) => {
+        setTitle(e.target.value);
+    }
+
 
     const handleDelete = async () => {
         await deletePhoto(id);
         navigate("/");
     }
 
+    const handleUpdate = async () => {
+        setProduct({ ...product, title });
+        await updatePhoto(id, { ...product, title });
+    }
+
     return (
         <div className={styles.Photo}>
             <div className={styles.Photo__header}>
-                <h1>{product ? product.title : "Loading..."}</h1>
+                {product ? <input className={styles.Photo__title} value={title} onChange={handleInputChange} /> : <h1>Loading...</h1>}
                 <div className={styles.Photo__buttons}>
                     <Link className={styles.Photo__buttons__back} to="/">Back to gallery</Link>
+                    <button className={styles.Photo__buttons__update} onClick={handleUpdate} disabled={!(title && title !== product.title)}><FontAwesomeIcon icon={faPenToSquare} /></button>
                     <button className={styles.Photo__buttons__delete} onClick={handleDelete}><FontAwesomeIcon icon={faTrashCan} /></button>
                 </div>
             </div>
