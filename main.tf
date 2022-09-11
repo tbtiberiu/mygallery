@@ -5,6 +5,14 @@ terraform {
       version = "=3.0.0"
     }
   }
+
+  cloud {
+    organization = "tbtiberiu"
+
+    workspaces {
+      name = "mygallery"
+    }
+  }
 }
 
 provider "azurerm" {
