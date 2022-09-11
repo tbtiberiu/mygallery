@@ -51,6 +51,11 @@ resource "azurerm_network_interface" "mygallery" {
   }
 }
 
+resource "tls_private_key" "simple_ssh" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
 resource "azurerm_linux_virtual_machine" "mygallery" {
   name                = "mygallery-machine"
   resource_group_name = azurerm_resource_group.mygallery.name
@@ -60,6 +65,11 @@ resource "azurerm_linux_virtual_machine" "mygallery" {
   network_interface_ids = [
     azurerm_network_interface.mygallery.id,
   ]
+
+  admin_ssh_key {
+    username   = "adminuser"
+    public_key = tls_private_key.simple_ssh.public_key_openssh
+  }
 
   os_disk {
     caching              = "ReadWrite"
