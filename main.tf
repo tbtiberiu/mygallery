@@ -13,6 +13,8 @@ terraform {
       name = "mygallery"
     }
   }
+
+  required_version = ">= 1.0.0"
 }
 
 provider "azurerm" {
@@ -33,10 +35,35 @@ resource "azurerm_virtual_network" "mygallery" {
 }
 
 resource "azurerm_subnet" "mygallery" {
-  name                 = "internal"
+  name                 = "mygallery-subnet"
   resource_group_name  = azurerm_resource_group.mygallery.name
   virtual_network_name = azurerm_virtual_network.mygallery.name
   address_prefixes     = ["10.0.2.0/24"]
+}
+
+resource "azurerm_public_ip" "mygallery" {
+  name                = "mygallery-ip"
+  location            = azurerm_resource_group.mygallery.location
+  resource_group_name = azurerm_resource_group.mygallery.name
+  allocation_method   = "Dynamic"
+}
+
+resource "azurerm_network_security_group" "mygallery" {
+  name                = "mygallery-nsg"
+  location            = azurerm_resource_group.mygallery.location
+  resource_group_name = azurerm_resource_group.mygallery.name
+
+  security_rule {
+    name                       = "SSH"
+    priority                   = 1001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
 }
 
 resource "azurerm_network_interface" "mygallery" {
