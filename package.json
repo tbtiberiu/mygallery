@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "json-server --watch db.json",
+    "serve": "npx json-server db.json --port 3000",
     "preview": "vite preview"
   },
   "dependencies": {

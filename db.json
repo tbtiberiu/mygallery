@@ -1,11 +1,3 @@
 {
-  "photos": [
-    {
-      "id": "d30b66af-752f-481e-9ebd-fdf0c1155c5b",
-      "title": "Car",
-      "image": "blob:http://localhost:5173/b8e08f4d-7895-4b8a-907d-139e7e730e72",
-      "uploadDate": "8/17/2022",
-      "type": "avif"
-    }
-  ]
+  "photos": []
 }
